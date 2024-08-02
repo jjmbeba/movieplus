@@ -7,7 +7,8 @@ import {navLinks} from "@/constants";
 
 const Navbar = () => {
     return (
-        <nav className={'sticky top-0 z-10 py-3 px-[5%] flex items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-700/20'}>
+        <nav
+            className={'sticky top-0 z-10 py-3 px-[5%] flex items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-700/20'}>
             <Logo/>
             <div className={'flex items-center gap-3'}>
                 {navLinks.map(({text, link}) => (
@@ -19,11 +20,15 @@ const Navbar = () => {
                 ))}
             </div>
             <div className={'flex items-center gap-3'}>
-                <Button variant={'shine'}>
-                    Get started
+                <Button variant={'shine'} asChild>
+                    <Link href={'/signup'}>
+                        Get started
+                    </Link>
                 </Button>
-                <Button variant={'secondary'}>
-                    Login
+                <Button variant={'secondary'} asChild>
+                    <Link href={'/login'}>
+                        Login
+                    </Link>
                 </Button>
             </div>
         </nav>

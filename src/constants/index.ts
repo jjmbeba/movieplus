@@ -6,7 +6,7 @@ export const navLinks = [
         text: 'Movies',
         link : '/movies'
     },{
-        text: 'TV',
+        text: 'Tv Series',
         link : '/tv'
     },
 ]

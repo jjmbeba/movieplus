@@ -1,10 +1,15 @@
 import React from 'react'
 import CarouselList from "@/components/CarouselList";
+import {getTrendingMovies} from "@/lib/actions";
+import {Movie} from "@/lib/types";
 
-const TrendingMovies = () => {
+const TrendingMovies = async () => {
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    const trendingMovies:Movie[] = await getTrendingMovies();
+
     return (
         <div className={'container mt-16 w-full'}>
-            <CarouselList title={'Trending Movies'}/>
+            <CarouselList title={'Trending Movies'} data={trendingMovies} />
         </div>
     )
 }
