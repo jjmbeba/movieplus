@@ -4,7 +4,6 @@ import {getTrendingMovies} from "@/lib/actions";
 import {Movie} from "@/lib/types";
 
 const TrendingMovies = async () => {
-    await new Promise(resolve => setTimeout(resolve, 2500));
     const trendingMovies:Movie[] = await getTrendingMovies();
 
     return (

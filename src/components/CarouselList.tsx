@@ -14,17 +14,17 @@ const CarouselList = ({title, data}: Props) => {
             </h2>
             <Carousel className="w-full mt-6">
                 <CarouselContent className="-ml-1 w-full">
-                    {data.map(({id, title, backdrop_path}) => (
+                    {data?.map(({id, title, backdrop_path, poster_path}) => (
                         <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/5">
                             <div className={'group hover:cursor-pointer'}>
                                 <Image
-                                    width={227}
+                                    width={200}
                                     height={165}
-                                    src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+                                    src={`https://image.tmdb.org/t/p/original${poster_path}`}
                                     alt={title}
                                     className={'object-cover rounded'}
                                 />
-                                <h3 className={'text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
+                                <h3 className={'max-w-[280px] text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
                                     {title}
                                 </h3>
                             </div>

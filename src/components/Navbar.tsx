@@ -8,7 +8,7 @@ import {navLinks} from "@/constants";
 const Navbar = () => {
     return (
         <nav
-            className={'sticky top-0 z-10 py-3 px-[5%] flex items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-700/20'}>
+            className={'sticky top-0 z-10 py-2 px-[5%] flex items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-700/20'}>
             <Logo/>
             <div className={'flex items-center gap-3'}>
                 {navLinks.map(({text, link}) => (
