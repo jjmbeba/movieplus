@@ -7,6 +7,7 @@ import {Button} from "@/components/ui/button";
 import {Video} from "lucide-react";
 
 const TrendingBanner = async () => {
+    await new Promise(resolve => setTimeout(resolve, 2500));
     const trendingMovies: Movie[] = await getTrendingMovies();
 
     const movieGenres = await getMovieGenres(trendingMovies?.[0].genre_ids)
@@ -16,7 +17,7 @@ const TrendingBanner = async () => {
             <h1 className={'font-bold text-xl'}>
                 Trending This Week
             </h1>
-            <div className={'mt-8 relative w-full h-[50dvh] rounded'}>
+            <div className={'mt-8 relative w-full h-[50dvh]'}>
                 <Image
                     fill
                     src={`https://image.tmdb.org/t/p/original${trendingMovies?.[0].backdrop_path}`}
@@ -28,13 +29,13 @@ const TrendingBanner = async () => {
                         <h2 className={'font-bold text-3xl invert'}>
                             {trendingMovies?.[0].title}
                         </h2>
-                        <p className={'text-xs opacity-70 font-semibold invert space-x-2'}>
+                        <div className={'text-xs opacity-70 font-semibold invert space-x-2'}>
                             {movieGenres.length > 0 && movieGenres.map((genre) => (
                                <Badge key={genre?.id} variant={'outline'}>
                                    {genre?.name}
                                </Badge>
                             ))}
-                        </p>
+                        </div>
                     </div>
                     <Button variant={'gooeyLeft'}>
                         <Video className={'h-4 w-4 mr-2'}/>

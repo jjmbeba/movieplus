@@ -1,13 +1,16 @@
 import TrendingMovies from "@/components/TrendingMovies";
-import CarouselListSkeleton from "@/components/CarouselListSkeleton";
+import CarouselListSkeleton from "@/components/skeletons/CarouselListSkeleton";
 import {Suspense} from "react";
 import UpcomingMovies from "@/components/UpcomingMovies";
 import PopularMovies from "@/components/PopularMovies";
 import TrendingBanner from "@/components/TrendingBanner";
+import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleton";
 
 export default function Home() {
     return <main className={'pb-20'}>
-        <TrendingBanner />
+        <Suspense fallback={<TrendingBannerSkeleton/>}>
+            <TrendingBanner />
+        </Suspense>
         <Suspense fallback={<CarouselListSkeleton title={'Trending Movies'} />}>
             <TrendingMovies  />
         </Suspense>
