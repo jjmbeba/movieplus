@@ -1,5 +1,7 @@
+
+
 import React from 'react'
-import Logo from "@/components/Logo";
+import Logo from "@/components/common/Logo";
 import {Link} from "next-view-transitions";
 import {cn} from "@/lib/utils";
 import {Button, buttonVariants} from "@/components/ui/button";
@@ -12,7 +14,7 @@ const Navbar = () => {
             <Logo/>
             <div className={'flex items-center gap-3'}>
                 {navLinks.map(({text, link}) => (
-                    <Link key={link} href={link} className={cn('text-sm font-medium', buttonVariants({
+                    <Link key={link} href={link} className={cn(`text-sm font-medium ${'text-orange-600'}`, buttonVariants({
                         variant: 'linkHover2'
                     }))}>
                         {text}

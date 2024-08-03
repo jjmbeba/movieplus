@@ -1,8 +1,8 @@
-import TrendingMovies from "@/components/TrendingMovies";
+import TrendingMovies from "@/components/movies/TrendingMovies";
 import CarouselListSkeleton from "@/components/skeletons/CarouselListSkeleton";
 import {Suspense} from "react";
-import UpcomingMovies from "@/components/UpcomingMovies";
-import PopularMovies from "@/components/PopularMovies";
+import UpcomingMovies from "@/components/movies/UpcomingMovies";
+import PopularMovies from "@/components/movies/PopularMovies";
 import TrendingBanner from "@/components/TrendingBanner";
 import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleton";
 

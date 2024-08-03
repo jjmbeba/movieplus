@@ -1,5 +1,5 @@
 import React from 'react'
-import {getMovieGenres, getTrendingMovies} from "@/lib/actions";
+import {getMovieTvGenres, getTrendingMovies} from "@/lib/actions";
 import {Movie} from "@/lib/types";
 import BannerContent from "@/components/BannerContent";
 
@@ -7,7 +7,7 @@ const TrendingBanner = async () => {
     const trendingMovies: Movie[] = await getTrendingMovies();
     const {title, backdrop_path, genre_ids} = trendingMovies[0];
 
-    const movieGenres = await getMovieGenres(genre_ids)
+    const movieGenres = await getMovieTvGenres(genre_ids, 'movie')
 
     return (
         <div className={'container mt-10'}>

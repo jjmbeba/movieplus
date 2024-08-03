@@ -1,10 +1,10 @@
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,} from "@/components/ui/carousel"
-import {Movie} from "@/lib/types";
+import {Movie, TvSeries} from "@/lib/types";
 import Image from "next/image";
 
 type Props = {
     title: string;
-    data: Movie[]
+    data: Movie[] | TvSeries[]
 };
 const CarouselList = ({title, data}: Props) => {
     return (
@@ -14,22 +14,26 @@ const CarouselList = ({title, data}: Props) => {
             </h2>
             <Carousel className="w-full mt-6">
                 <CarouselContent className="-ml-1 w-full">
-                    {data?.map(({id, title, backdrop_path, poster_path}) => (
-                        <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/5">
-                            <div className={'group hover:cursor-pointer'}>
-                                <Image
-                                    width={200}
-                                    height={165}
-                                    src={`https://image.tmdb.org/t/p/original${poster_path}`}
-                                    alt={title}
-                                    className={'object-cover rounded'}
-                                />
-                                <h3 className={'max-w-[280px] text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
-                                    {title}
-                                </h3>
-                            </div>
-                        </CarouselItem>
-                    ))}
+                    {data?.map((record) => {
+                        const {id, backdrop_path, poster_path} = record;
+
+                        return (
+                            <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/5">
+                                <div className={'group hover:cursor-pointer'}>
+                                    <Image
+                                        width={200}
+                                        height={165}
+                                        src={`https://image.tmdb.org/t/p/original${poster_path}`}
+                                        alt={''}
+                                        className={'object-cover rounded'}
+                                    />
+                                    <h3 className={'max-w-[280px] text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
+                                        {title}
+                                    </h3>
+                                </div>
+                            </CarouselItem>
+                        )
+                    })}
                 </CarouselContent>
                 <CarouselPrevious/>
                 <CarouselNext/>

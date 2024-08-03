@@ -1,11 +1,11 @@
 import React, {Suspense} from 'react'
 import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleton";
 import TrendingBanner from "@/components/TrendingBanner";
-import TrendingMovieCarousel from "@/components/TrendingMovieCarousel";
+import TrendingMovieCarousel from "@/components/movies/TrendingMovieCarousel";
 import CarouselListSkeleton from "@/components/skeletons/CarouselListSkeleton";
-import TrendingMovies from "@/components/TrendingMovies";
-import UpcomingMovies from "@/components/UpcomingMovies";
-import PopularMovies from "@/components/PopularMovies";
+import TrendingMovies from "@/components/movies/TrendingMovies";
+import UpcomingMovies from "@/components/movies/UpcomingMovies";
+import PopularMovies from "@/components/movies/PopularMovies";
 
 const Page = () => {
     return (

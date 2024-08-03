@@ -1,10 +1,6 @@
 import React from 'react'
 import {Movie} from "@/lib/types";
-import {getMovieGenres, getTrendingMovies} from "@/lib/actions";
-import Image from "next/image";
-import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
-import {Video} from "lucide-react";
+import {getMovieTvGenres, getTrendingMovies} from "@/lib/actions";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
 import BannerContent from "@/components/BannerContent";
 
@@ -19,7 +15,7 @@ const TrendingMovieCarousel = async () => {
             <Carousel>
                 <CarouselContent className="-ml-1 w-full">
                     {trendingMovies?.slice(0,5).map(async ({id, title, backdrop_path, poster_path, genre_ids}) => {
-                        const movieGenres = await getMovieGenres(genre_ids);
+                        const movieGenres = await getMovieTvGenres(genre_ids, 'movie');
 
                         return (
                             <CarouselItem key={id} className="pl-1">
