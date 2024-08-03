@@ -1,6 +1,6 @@
 import React from 'react'
 import Logo from "@/components/Logo";
-import Link from "next/link";
+import {Link} from "next-view-transitions";
 import {cn} from "@/lib/utils";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {navLinks} from "@/constants";
