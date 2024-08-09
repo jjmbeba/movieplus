@@ -3,6 +3,7 @@ import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleto
 import TrendingSeriesBanner from "@/components/series/TrendingSeriesBanner";
 import TrendingTvSeries from "@/components/series/TrendingTvSeries";
 import CarouselListSkeleton from "@/components/skeletons/CarouselListSkeleton";
+import PopularTvSeries from "@/components/series/PopularTvSeries";
 
 const Page = () => {
     return (
@@ -12,6 +13,9 @@ const Page = () => {
             </Suspense>
             <Suspense fallback={<CarouselListSkeleton title={'Trending Tv Series'} />}>
                 <TrendingTvSeries/>
+            </Suspense>
+            <Suspense fallback={<CarouselListSkeleton title={'Popular Tv Series'} />}>
+                <PopularTvSeries/>
             </Suspense>
         </main>
     )

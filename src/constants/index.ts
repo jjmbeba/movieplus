@@ -10,3 +10,7 @@ export const navLinks = [
         link : '/tv'
     },
 ]
+
+export const excludedRoutes = [
+    '/register', '/login'
+]

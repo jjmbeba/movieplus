@@ -36,3 +36,7 @@ export const getMovieTvGenres = async (genreIds:Number[], type:'movie'|'tv') => 
 export const getTrendingTvSeries = async () => {
     return await fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US',options).then((response) => response.json()).then((result) => result.results);
 }
+
+export const getPopularTvSeries = async () => {
+    return await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options).then((response) => response.json()).then((result) => result.results);
+}

@@ -4,6 +4,7 @@ import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import {Bookmark, Video} from "lucide-react";
 import {Genre} from "@/lib/types";
+import getBase64 from "@/lib/get-base64";
 
 type Props = {
     title:string;
@@ -11,12 +12,15 @@ type Props = {
     movieGenres:(Genre | undefined)[]
 }
 
-const BannerContent = ({title, backdrop_path, movieGenres}:Props) => {
+const BannerContent = async ({title, backdrop_path, movieGenres}:Props) => {
+    const blurData = await getBase64(`https://image.tmdb.org/t/p/original${backdrop_path}`);
+
     return (
         <div className={'mt-8 relative w-full h-[50dvh]'}>
             <Image
                 fill
                 src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
+                blurDataURL={blurData}
                 alt={title}
                 className={'object-cover -z-10 rounded-2xl'}
             />

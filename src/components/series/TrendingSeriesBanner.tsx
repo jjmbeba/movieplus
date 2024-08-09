@@ -7,14 +7,14 @@ import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleto
 
 const TrendingSeriesBanner = async () => {
     const trendingSeries: TvSeries[] = await getTrendingTvSeries();
-    console.log(trendingSeries);
+
+    console.log(trendingSeries.slice(0, 6))
 
     return (
         <div className={'container mt-10'}>
             <h1 className={'font-bold text-xl'}>
                 Trending Series This Week
             </h1>
-            <Suspense fallback={<TrendingBannerSkeleton/>}>
                 <Carousel>
                     <CarouselContent className="-ml-1 w-full">
                         {trendingSeries?.slice(0,5).map(async ({id, name, backdrop_path, poster_path, genre_ids}) => {
@@ -30,8 +30,6 @@ const TrendingSeriesBanner = async () => {
                     <CarouselPrevious/>
                     <CarouselNext/>
                 </Carousel>
-            </Suspense>
-
         </div>
     )
 }
