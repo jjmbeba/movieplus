@@ -1,7 +1,7 @@
 
 import { signIn } from "@/auth"
-import {Github} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import GithubIcon from '@/components/common/icons/GithubIcon'
 
 export function GithubSignIn() {
     return (
@@ -12,7 +12,7 @@ export function GithubSignIn() {
             }}
         >
             <Button variant={'outline'} className={'w-full'}>
-                <Github className={'h-4 w-4 mr-2'}/>
+                <GithubIcon className={'h-4 w-4 mr-2 invert'}/>
                 Continue with Github
             </Button>
         </form>
