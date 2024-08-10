@@ -1,6 +1,7 @@
 "use server";
 
 import {Genre} from "@/lib/types";
+import {signIn} from "@/auth";
 
 const options = {
     headers: {
@@ -39,4 +40,10 @@ export const getTrendingTvSeries = async () => {
 
 export const getPopularTvSeries = async () => {
     return await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options).then((response) => response.json()).then((result) => result.results);
+}
+
+export const sendMagicLink = async (email:string) => {
+    return await signIn('resend', {
+        email
+    })
 }

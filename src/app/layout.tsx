@@ -1,29 +1,31 @@
-import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import type {Metadata} from "next";
+import {Raleway} from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Providers from "@/components/providers/providers";
+import {Toaster} from '@/components/ui/sonner'
 
-const raleway = Raleway({ subsets: ["latin"] });
+const raleway = Raleway({subsets: ["latin"]});
 
 export const metadata: Metadata = {
-  title: "MoviePlus",
-  description: "Your one-stop shop for all your movie needs",
+    title: "MoviePlus",
+    description: "Your one-stop shop for all your movie needs",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={raleway.className}>
-        <Navbar />
+    return (
+        <html lang="en">
+        <body className={raleway.className}>
         <Providers>
+            <Navbar/>
             {children}
+            <Toaster richColors/>
         </Providers>
-      </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }

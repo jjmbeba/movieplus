@@ -1,37 +1,74 @@
-import {Button} from "@/components/ui/button"
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
-import {Input} from "@/components/ui/input"
-import {Label} from "@/components/ui/label"
-import GoBackButton from "@/components/common/GoBackButton";
-import {GithubSignIn} from "@/components/common/GithubSignIn";
-import GoogleSignIn from "@/components/common/GoogleSignIn";
+"use client";
 
-export function RegisterForm() {
+import React from 'react'
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {registerSchema} from "@/components/schemas";
+import {zodResolver} from "@hookform/resolvers/zod";
+
+import { Button } from "@/components/ui/button"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import {useMutation} from "@tanstack/react-query";
+import {sendMagicLink} from "@/lib/actions";
+import {Loader} from "lucide-react";
+import {toast} from "sonner";
+
+const RegisterForm = () => {
+    const {data, isPending} = useMutation({
+        mutationKey:['email'],
+        mutationFn:async (values: z.infer<typeof registerSchema>) => {
+            return await sendMagicLink(values.email)
+        },
+        onError:(error) => {
+            toast.error(error.message)
+        }
+    })
+
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver:zodResolver(registerSchema),
+        defaultValues:{
+            email: ""
+        }
+    });
+
+    function onSubmit(values: z.infer<typeof registerSchema>){
+        console.log(values);
+    }
+
     return (
-        <Card className="w-full max-w-sm">
-            <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-4">
-                    <GoBackButton/>
-                    Register
-                </CardTitle>
-                <CardDescription>
-                    Enter your email below to register for an account.
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-4">
-                <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="m@example.com" required/>
-                </div>
-            </CardContent>
-            <CardFooter className={'flex flex-col gap-2'}>
-                <Button className="w-full">Register</Button>
-                <span>or</span>
-                <div className={'w-full space-y-3'}>
-                    <GithubSignIn/>
-                    <GoogleSignIn/>
-                </div>
-            </CardFooter>
-        </Card>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input placeholder="johndoe@email.com" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                This is your public display email.
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button disabled={isPending} className={'w-full'} type="submit">
+                    {isPending && <Loader className={'w-4 h-4 mr-2 animate-spin'}/>}
+                    Continue
+                </Button>
+            </form>
+        </Form>
     )
 }
+export default RegisterForm

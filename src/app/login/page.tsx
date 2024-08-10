@@ -8,14 +8,14 @@ import RegisterForm from "@/components/forms/RegisterForm";
 const Page = () => {
     return (
         <div className={'flex items-center justify-center min-h-screen'}>
-            <RegisterCard footerLink={'/login'} footerLinkText={'Already have an account? Login'}>
+            <RegisterCard footerLinkText={"Don't have an account? Register"} footerLink={'/register'}>
                 <CardHeader>
                     <CardTitle className="text-2xl flex items-center gap-4">
                         <GoBackButton/>
-                        Register To <Logo variant={'2xl'} />
+                        Login To <Logo variant={'2xl'} />
                     </CardTitle>
                     <CardDescription>
-                        Enter your email below to register for an account.
+                        Enter your email below to login.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
