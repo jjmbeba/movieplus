@@ -47,3 +47,7 @@ export const sendMagicLink = async (email:string) => {
         email
     })
 }
+
+export const getMovieTvDetailsById = async (id:string, type:'movie'|'tv') => {
+    return await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=en-US`, options).then((response) => response.json());
+}

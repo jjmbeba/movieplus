@@ -8,7 +8,7 @@ const TrendingMovies = async () => {
 
     return (
         <div className={'container mt-16 w-full'}>
-            <CarouselList title={'Trending Movies'} data={trendingMovies} />
+            <CarouselList title={'Trending Movies'} data={trendingMovies} type={'movie'} />
         </div>
     )
 }

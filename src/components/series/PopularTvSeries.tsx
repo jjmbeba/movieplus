@@ -8,7 +8,7 @@ const PopularTvSeries = async () => {
 
     return (
         <div className={'container mt-16 w-full'}>
-            <CarouselList title={'Popular Tv Series'} data={popularTvSeries} />
+            <CarouselList title={'Popular Tv Series'} data={popularTvSeries} type={'tv'} />
         </div>
     )
 }

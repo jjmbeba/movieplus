@@ -2,12 +2,15 @@ import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious,
 import {Movie, TvSeries} from "@/lib/types";
 import Image from "next/image";
 import getBase64 from "@/lib/get-base64";
+import {Link} from "next-view-transitions";
+import {getSlug} from "@/lib/utils";
 
 type Props = {
     title: string;
     data: Movie[] | TvSeries[]
+    type: 'movie' | 'tv'
 };
-const CarouselList = ({title, data}: Props) => {
+const CarouselList = ({title, data, type}: Props) => {
 
     return (
         <div className={'w-full'}>
@@ -24,7 +27,7 @@ const CarouselList = ({title, data}: Props) => {
 
                         return (
                             <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/5">
-                                <div className={'group hover:cursor-pointer'}>
+                                <Link href={`/${type}/${id}/${getSlug(displayTitle)}`} className={'group hover:cursor-pointer'}>
                                     <Image
                                         width={200}
                                         height={165}
@@ -33,10 +36,10 @@ const CarouselList = ({title, data}: Props) => {
                                         alt={displayTitle}
                                         className={'object-cover rounded'}
                                     />
-                                    <h3 className={'max-w-[280px] text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
+                                    <h3 className={'max-w-[250px] text-sm font-semibold mt-4 group-hover:text-orange-600 group-hover:underline'}>
                                         {displayTitle}
                                     </h3>
-                                </div>
+                                </Link>
                             </CarouselItem>
                         )
                     })}

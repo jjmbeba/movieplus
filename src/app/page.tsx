@@ -5,6 +5,7 @@ import UpcomingMovies from "@/components/movies/UpcomingMovies";
 import PopularMovies from "@/components/movies/PopularMovies";
 import TrendingBanner from "@/components/TrendingBanner";
 import TrendingBannerSkeleton from "@/components/skeletons/TrendingBannerSkeleton";
+import {auth} from "@/auth";
 
 export default function Home() {
     return <main className={'pb-20'}>
@@ -17,7 +18,7 @@ export default function Home() {
         <Suspense fallback={<CarouselListSkeleton title={'Upcoming Movies'} />}>
             <UpcomingMovies/>
         </Suspense>
-        <Suspense fallback={<CarouselListSkeleton title={'Upcoming Movies'} />}>
+        <Suspense fallback={<CarouselListSkeleton title={'Popular Movies'} />}>
             <PopularMovies/>
         </Suspense>
         {/*<Suspense fallback={<CarouselListSkeleton title={'Trending Tv Series'} />}>*/}

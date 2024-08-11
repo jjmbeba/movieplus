@@ -31,7 +31,7 @@ const BannerContent = async ({title, backdrop_path, movieGenres}:Props) => {
                     </h2>
                     <div className={'text-xs opacity-70 font-semibold invert space-x-2'}>
                         {movieGenres?.map((genre) => (
-                            <Badge key={genre?.id} variant={'outline'}>
+                            <Badge key={genre?.id} variant={'outline'} className={'bg-black/50 text-white'}>
                                 {genre?.name}
                             </Badge>
                         ))}
