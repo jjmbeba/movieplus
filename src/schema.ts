@@ -77,3 +77,13 @@ export const authenticators = pgTable(
         }),
     })
 )
+
+//Create a bookmarks schema that stores the user's bookmarks. The schema should have the following columns: userId, tvMovieId, type(referring to either movie or tv) and createdAt. The userId column should reference the id column in the users table. The tvMovieId column should be a text column. The createdAt column should be a timestamp column.
+export const bookmarks = pgTable("bookmark", {
+    userId: text("userId")
+        .notNull()
+        .references(() => users.id, { onDelete: "cascade" }),
+    tvMovieId: text("tvMovieId").notNull(),
+    type: text("type").notNull(),
+    createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
+})
