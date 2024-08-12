@@ -8,8 +8,7 @@ import {Separator} from "@/components/ui/separator";
 import {MovieSearchResult, TvSearchResult} from "@/lib/types";
 import {getMovieTvDetailsById} from "@/lib/actions";
 import getBase64 from "@/lib/get-base64";
-import MovieTvDetailBackdrop from "@/components/common/MovieTvDetailBackdrop";
-import MovieTvDetailPoster from "@/components/common/MovieTvDetailPoster";
+import Image from 'next/image'
 
 type Props = {
     params: { id:string, type:'movie' | 'tv' }
@@ -18,7 +17,8 @@ type Props = {
 const MovieTvDetail = async ({params}:Props) => {
     const movieTvResult:MovieSearchResult | TvSearchResult = await getMovieTvDetailsById(params.id, params.type);
 
-    const blurData = await getBase64(`https://image.tmdb.org/t/p/original${movieTvResult.backdrop_path}`);
+    const blurBackdropData = await getBase64(`https://image.tmdb.org/t/p/original${movieTvResult.backdrop_path}`);
+    const blurPosterData = await getBase64(`https://image.tmdb.org/t/p/original${movieTvResult.poster_path}`);
 
     const displayTitle = 'original_title' in movieTvResult ? movieTvResult.title : (movieTvResult as TvSearchResult).name;
     return (
@@ -26,9 +26,26 @@ const MovieTvDetail = async ({params}:Props) => {
             <GoBackButton/>
             <div className={'w-full relative'}>
                 <div className={'relative w-full h-[50dvh] mt-8'}>
-                    <MovieTvDetailBackdrop backdrop_path={movieTvResult.backdrop_path} blurData={blurData} displayTitle={displayTitle}/>
+                    {/*<MovieTvDetailBackdrop backdrop_path={movieTvResult.backdrop_path} blurData={blurData} displayTitle={displayTitle}/>*/}
+                    <Image
+                        fill
+                        src={`https://image.tmdb.org/t/p/original${movieTvResult.backdrop_path}`}
+                        placeholder={'blur'}
+                        blurDataURL={blurBackdropData}
+                        alt={displayTitle}
+                        className={'object-cover -z-10 rounded-2xl opacity-80'}
+                    />
                 </div>
-               <MovieTvDetailPoster poster_path={movieTvResult.poster_path} displayTitle={displayTitle}/>
+               {/*<MovieTvDetailPoster poster_path={movieTvResult.poster_path} displayTitle={displayTitle}/>*/}
+                <Image
+                    src={`https://image.tmdb.org/t/p/original${movieTvResult.poster_path}`}
+                    width={293}
+                    height={440}
+                    blurDataURL={blurPosterData}
+                    placeholder={'blur'}
+                    className={'rounded-lg absolute -bottom-72 left-40'}
+                    alt={displayTitle}
+                />
             </div>
             <div className={'flex justify-end'}>
                 <div className={'mt-8 flex flex-col'}>
