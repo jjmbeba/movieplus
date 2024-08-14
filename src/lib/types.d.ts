@@ -171,3 +171,19 @@ export type Season = {
     vote_average:  number;
 }
 
+export type ButtonVariant =
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link'
+    | 'expandIcon'
+    | 'ringHover'
+    | 'shine'
+    | 'gooeyRight'
+    | 'gooeyLeft'
+    | 'linkHover1'
+    | 'linkHover2';
+
+export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';

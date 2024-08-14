@@ -19,7 +19,7 @@ const TrendingMovieCarousel = async () => {
 
                         return (
                             <CarouselItem key={id} className="pl-1">
-                                <BannerContent title={title} backdrop_path={backdrop_path} movieGenres={movieGenres}/>
+                                <BannerContent movieTvId={id} title={title} backdrop_path={backdrop_path} movieGenres={movieGenres} type={'movie'} />
                             </CarouselItem>
                         )
                     })}

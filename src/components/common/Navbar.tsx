@@ -25,7 +25,6 @@ const Navbar = () => {
     const {data: session} = useSession()
     if (excludedRoutes.includes(pathname)) return;
 
-    console.log(session)
     return (
         <nav
             className={'sticky top-0 z-10 py-2 px-[5%] flex items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-700/20'}>

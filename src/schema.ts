@@ -83,7 +83,7 @@ export const bookmarks = pgTable("bookmark", {
     userId: text("userId")
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),
-    tvMovieId: text("tvMovieId").notNull(),
+    tvMovieId: integer("tvMovieId").notNull(),
     type: text("type").notNull(),
     createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
 })

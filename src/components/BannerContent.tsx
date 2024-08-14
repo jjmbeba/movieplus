@@ -2,18 +2,23 @@ import React from 'react'
 import Image from "next/image";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
-import {Bookmark, Video} from "lucide-react";
+import {Video} from "lucide-react";
 import {Genre} from "@/lib/types";
 import getBase64 from "@/lib/get-base64";
+import BookmarkButton from "@/components/common/BookmarkButton";
+import {checkIfMovieTvBookmarked} from "@/lib/actions";
 
 type Props = {
     title:string;
     backdrop_path:string;
-    movieGenres:(Genre | undefined)[]
+    movieGenres:(Genre | undefined)[];
+    movieTvId:number;
+    type:'movie' | 'tv'
 }
 
-const BannerContent = async ({title, backdrop_path, movieGenres}:Props) => {
+const BannerContent = async ({title, backdrop_path, movieGenres, movieTvId, type}:Props) => {
     const blurData = await getBase64(`https://image.tmdb.org/t/p/original${backdrop_path}`);
+    const isBookmarked = await checkIfMovieTvBookmarked(movieTvId, 'movie');
 
     return (
         <div className={'mt-8 relative w-full h-[50dvh]'}>
@@ -42,9 +47,7 @@ const BannerContent = async ({title, backdrop_path, movieGenres}:Props) => {
                         <Video className={'h-4 w-4 mr-2'}/>
                         Watch Now
                     </Button>
-                    <Button variant={'secondary'} size={'icon'}>
-                        <Bookmark className={'h-5 w-5'} />
-                    </Button>
+                    <BookmarkButton movieSeriesId={movieTvId} variant={'secondary'} size={'icon'} isMovieBookmarked={isBookmarked} />
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import {MovieSearchResult, TvSearchResult} from "@/lib/types";
 import {getMovieTvDetailsById} from "@/lib/actions";
 import getBase64 from "@/lib/get-base64";
 import Image from 'next/image'
+import BookmarkButton from "@/components/common/BookmarkButton";
 
 type Props = {
     params: { id:string, type:'movie' | 'tv' }
@@ -26,7 +27,6 @@ const MovieTvDetail = async ({params}:Props) => {
             <GoBackButton/>
             <div className={'w-full relative'}>
                 <div className={'relative w-full h-[50dvh] mt-8'}>
-                    {/*<MovieTvDetailBackdrop backdrop_path={movieTvResult.backdrop_path} blurData={blurData} displayTitle={displayTitle}/>*/}
                     <Image
                         fill
                         src={`https://image.tmdb.org/t/p/original${movieTvResult.backdrop_path}`}
@@ -36,7 +36,6 @@ const MovieTvDetail = async ({params}:Props) => {
                         className={'object-cover -z-10 rounded-2xl opacity-80'}
                     />
                 </div>
-               {/*<MovieTvDetailPoster poster_path={movieTvResult.poster_path} displayTitle={displayTitle}/>*/}
                 <Image
                     src={`https://image.tmdb.org/t/p/original${movieTvResult.poster_path}`}
                     width={293}
@@ -53,9 +52,7 @@ const MovieTvDetail = async ({params}:Props) => {
                         <h1 className={'font-bold text-3xl'}>
                             {displayTitle} {'release_date' in movieTvResult && `(${new Date(movieTvResult.release_date).getFullYear()})`}
                         </h1>
-                        <Button size={'icon'} variant={'ghost'}>
-                            <Bookmark/>
-                        </Button>
+                        <BookmarkButton movieSeriesId={movieTvResult.id} variant={'ghost'} size={'icon'} />
                     </div>
                     <div className={'text-xs opacity-70 font-semibold space-x-2 mt-2'}>
                         {movieTvResult.genres.map((genre) => (

@@ -22,7 +22,7 @@ const TrendingSeriesBanner = async () => {
 
                             return (
                                 <CarouselItem key={id} className="pl-1">
-                                    <BannerContent title={name} backdrop_path={backdrop_path} movieGenres={seriesGenres}/>
+                                    <BannerContent movieTvId={id} title={name} type={'tv'} backdrop_path={backdrop_path} movieGenres={seriesGenres}/>
                                 </CarouselItem>
                             )
                         })}
