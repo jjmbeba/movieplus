@@ -1,7 +1,5 @@
 import React from 'react'
 import GoBackButton from "@/components/common/GoBackButton";
-import {Button} from "@/components/ui/button";
-import {Bookmark} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
 import {getVoteAverageColor} from "@/lib/utils";
 import {Separator} from "@/components/ui/separator";
@@ -54,7 +52,7 @@ const MovieTvDetail = async ({params}:Props) => {
                         <h1 className={'font-bold text-3xl'}>
                             {displayTitle} {'release_date' in movieTvResult && `(${new Date(movieTvResult.release_date).getFullYear()})`}
                         </h1>
-                        <BookmarkButton movieSeriesId={movieTvResult.id} variant={'ghost'} size={'icon'} isMovieBookmarked={isBookmarked} />
+                        <BookmarkButton type={params.type} movieSeriesId={movieTvResult.id} variant={'ghost'} size={'icon'} isMovieBookmarked={isBookmarked} />
                     </div>
                     <div className={'text-xs opacity-70 font-semibold space-x-2 mt-2'}>
                         {movieTvResult.genres.map((genre) => (

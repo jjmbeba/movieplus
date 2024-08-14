@@ -4,26 +4,22 @@ import React, {useState} from 'react'
 import {Button} from "@/components/ui/button";
 import {Bookmark, Loader} from "lucide-react";
 import {ButtonSize, ButtonVariant} from "@/lib/types";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,} from "@/components/ui/tooltip"
 import {useSession} from "next-auth/react";
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {bookmark, checkIfMovieTvBookmarked} from "@/lib/actions";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {bookmark} from "@/lib/actions";
 
 type Props = {
     variant: ButtonVariant;
     size: ButtonSize;
     movieSeriesId: number;
     isMovieBookmarked:boolean;
+    type:'movie' | 'tv'
 }
 
-const BookmarkButton = ({variant, size, movieSeriesId, isMovieBookmarked}: Props) => {
+const BookmarkButton = ({variant, size, movieSeriesId, isMovieBookmarked, type}: Props) => {
     const {data:session} = useSession();
     const router = useRouter();
     const queryClient = useQueryClient();
@@ -45,7 +41,6 @@ const BookmarkButton = ({variant, size, movieSeriesId, isMovieBookmarked}: Props
     });
 
     const [isBookmarked, setIsBookmarked] = useState(isMovieBookmarked);
-    console.log(isBookmarked,'isBookmarked')
 
     return (
         <TooltipProvider>
@@ -58,7 +53,7 @@ const BookmarkButton = ({variant, size, movieSeriesId, isMovieBookmarked}: Props
                             return;
                         }
 
-                        mutate({type: 'movie', movieSeriesId})
+                        mutate({type, movieSeriesId})
 
                     }}>
                         {isPending ? <Loader className={'h-4 w-4 animate-spin'}/> : <Bookmark className={`h-4 w-4 ${isBookmarked ? 'text-amber-300 fill-amber-300' : ''}`}/>}

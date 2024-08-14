@@ -1,11 +1,12 @@
 "use server";
 
-import {Genre} from "@/lib/types";
+import {Genre, MovieSearchResult, TvSearchResult} from "@/lib/types";
 import {auth, signIn} from "@/auth";
 import {redirect} from "next/navigation";
 import {db} from "@/db";
 import {bookmarks} from "@/schema";
 import {and, eq} from "drizzle-orm";
+import {revalidatePath} from "next/cache";
 
 const options = {
     headers: {
@@ -74,6 +75,8 @@ export const bookmark = async (type: 'movie' | 'tv', tvMovieId: number) => {
             )
         )
 
+        revalidatePath('/bookmarks','page')
+
         return {
             'message': 'Bookmarked removed successfully',
             'status': 'success'
@@ -86,6 +89,8 @@ export const bookmark = async (type: 'movie' | 'tv', tvMovieId: number) => {
             type,
             createdAt: new Date()
         })
+
+        revalidatePath('/bookmarks','page')
 
         return {
             'message': 'Bookmarked successfully',
@@ -110,4 +115,24 @@ export const checkIfMovieTvBookmarked = async (tvMovieId: number, type: 'movie' 
     );
 
     return result.length > 0;
+}
+
+export const getUserBookmarks = async () => {
+    const session = await auth();
+
+    if (!session?.user?.id) return [];
+
+    const results = await db.select().from(bookmarks).where(
+        eq(bookmarks.userId, session.user.id)
+    );
+
+    const moviesTv = results.map(async(result) => {
+        const movieTv:MovieSearchResult | TvSearchResult = await fetch(`https://api.themoviedb.org/3/${result.type}/${result.tvMovieId}?language=en-US`, options).then((response) => response.json());
+        return {
+            ...movieTv,
+            type: result.type
+        }
+    });
+
+    return Promise.all(moviesTv);
 }

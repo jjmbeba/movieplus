@@ -18,7 +18,7 @@ type Props = {
 
 const BannerContent = async ({title, backdrop_path, movieGenres, movieTvId, type}:Props) => {
     const blurData = await getBase64(`https://image.tmdb.org/t/p/original${backdrop_path}`);
-    const isBookmarked = await checkIfMovieTvBookmarked(movieTvId, 'movie');
+    const isBookmarked = await checkIfMovieTvBookmarked(movieTvId, type);
 
     return (
         <div className={'mt-8 relative w-full h-[50dvh]'}>
@@ -47,7 +47,7 @@ const BannerContent = async ({title, backdrop_path, movieGenres, movieTvId, type
                         <Video className={'h-4 w-4 mr-2'}/>
                         Watch Now
                     </Button>
-                    <BookmarkButton movieSeriesId={movieTvId} variant={'secondary'} size={'icon'} isMovieBookmarked={isBookmarked} />
+                    <BookmarkButton type={type} movieSeriesId={movieTvId} variant={'secondary'} size={'icon'} isMovieBookmarked={isBookmarked} />
                 </div>
             </div>
         </div>

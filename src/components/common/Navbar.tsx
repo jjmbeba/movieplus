@@ -53,7 +53,11 @@ const Navbar = () => {
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Bookmarks</DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Link href={'/bookmarks'}>
+                                Bookmarks
+                            </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => signOut()} className={'text-red-600'}>Logout</DropdownMenuItem>
                     </DropdownMenuContent>
