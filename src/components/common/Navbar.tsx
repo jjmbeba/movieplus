@@ -7,7 +7,7 @@ import {cn} from "@/lib/utils";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {excludedRoutes, navLinks} from "@/constants";
 import {usePathname} from "next/navigation";
-import {useSession} from "next-auth/react";
+import {useSession, signOut} from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu,
@@ -55,7 +55,7 @@ const Navbar = () => {
                         <DropdownMenuItem>Profile</DropdownMenuItem>
                         <DropdownMenuItem>Bookmarks</DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => signOut()} className={'text-red-600'}>Logout</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
 

@@ -6,7 +6,7 @@ import {Badge} from "@/components/ui/badge";
 import {getVoteAverageColor} from "@/lib/utils";
 import {Separator} from "@/components/ui/separator";
 import {MovieSearchResult, TvSearchResult} from "@/lib/types";
-import {getMovieTvDetailsById} from "@/lib/actions";
+import {checkIfMovieTvBookmarked, getMovieTvDetailsById} from "@/lib/actions";
 import getBase64 from "@/lib/get-base64";
 import Image from 'next/image'
 import BookmarkButton from "@/components/common/BookmarkButton";
@@ -22,6 +22,8 @@ const MovieTvDetail = async ({params}:Props) => {
     const blurPosterData = await getBase64(`https://image.tmdb.org/t/p/original${movieTvResult.poster_path}`);
 
     const displayTitle = 'original_title' in movieTvResult ? movieTvResult.title : (movieTvResult as TvSearchResult).name;
+
+    const isBookmarked = await checkIfMovieTvBookmarked(movieTvResult.id, params.type);
     return (
         <main className={'pb-20 container mt-10'}>
             <GoBackButton/>
@@ -52,7 +54,7 @@ const MovieTvDetail = async ({params}:Props) => {
                         <h1 className={'font-bold text-3xl'}>
                             {displayTitle} {'release_date' in movieTvResult && `(${new Date(movieTvResult.release_date).getFullYear()})`}
                         </h1>
-                        <BookmarkButton movieSeriesId={movieTvResult.id} variant={'ghost'} size={'icon'} />
+                        <BookmarkButton movieSeriesId={movieTvResult.id} variant={'ghost'} size={'icon'} isMovieBookmarked={isBookmarked} />
                     </div>
                     <div className={'text-xs opacity-70 font-semibold space-x-2 mt-2'}>
                         {movieTvResult.genres.map((genre) => (
